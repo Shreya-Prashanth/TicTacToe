@@ -9,7 +9,7 @@ def set_tile(row,column):
   if board[row][column]["text"]!="":
     return; #spot already marked
     
-  board[row][column]["test"]=curr_player #mark the board
+  board[row][column]["text"]=curr_player #mark the board
 
   if curr_player == playerO: #switch player
     curr_player = playerX
@@ -32,12 +32,53 @@ def check_winner():
         board[row][column].config(foreground=color_yello,background=color_light_gray)
       game_over = True
       return;
-    
+  #vertical checking
+  for column in range(3):
+    if (board[0][column]["text"] == board[1][column]["text"] == board[2][column]["text"]
+        and board[0][column]["text"]!=""):
+        label.config(text=board[0][coumn]["text"]+"is the Winner",foreground=color_yellow)
+        for column in range(3):
+          board[row][column].config(foreground=color_yello,background=color_light_gray)
+        game_over = True
+        return;
+          
+  #diagonal checking
+  if(board[0][0]["text"] == board[1][1]["text"] == board[2][2]["text"]
+     and board[0][0]["text"]!=""):
+      label.config(text=board[0][0]["text"]+"is the Winner",foreground=color_yellow)
+      for i in range(3):
+        board[i][i].config(foreground=color_yello,background=color_light_gray)
+      game_over = true
+      return
   
-  
+  #antidiagonally
+  if(board[0][2]["text"] == board[1][1]["text"] == board[2][0]["text"]
+     and board[0][0]["text"]!=""):
+       label.config(text=board[0][2]["text"]+"is the Winner",foreground=color_yellow)
+       board[0][2].config(foreground=color_yellow,background=color_light_gray)
+       board[1][1].config(foreground=color_yellow,background=color_light_gray)
+       board[2][0].config(foreground=color_yellow,background=color_light_gray)
+       game_over = true
+       return
+
+  #tie
+  if(turns==9):
+    game_over = True
+    label.config(text="Tie!",foreground=color_yellow)
+        
 
 def new_game():
-  pass
+  global turns,game_over
+  turns =0
+  game_over = False
+
+  label.config(text= curr_player+"'s turn",foreground="white")
+  
+  for row in range(3):
+    for column in range(3):
+      board[row][column].config(text="",foreground=color_blue,background=color_gray)
+
+
 #game setup
 playerX = "X"
 playerO = "O"
