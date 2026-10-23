@@ -1,7 +1,40 @@
 import tkinter #tk - interface (graphic user interface) library)
 
 def set_tile(row,column):
-  pass
+  global curr_player
+
+  if(game_over):
+    return
+
+  if board[row][column]["text"]!="":
+    return; #spot already marked
+    
+  board[row][column]["test"]=curr_player #mark the board
+
+  if curr_player == playerO: #switch player
+    curr_player = playerX
+  else:
+    curr_player=playerO
+
+  label["text"] = curr_player+"'s turn"
+  #check winner
+  check_winner()
+def check_winner():
+  global turns,game_over;
+  turns+=1
+
+  #horizontal checking
+  for row in range(3):
+    if(board[row][0]["text"] == board[row][1]["text"] == board[row][2]["text"]
+      and board[row][0]["text"]!=""):
+      label.config(text=board[row][0]["text"] + "is the Winner" , foregrounf=color_yellow)
+      for column in range(3):
+        board[row][column].config(foreground=color_yello,background=color_light_gray)
+      game_over = True
+      return;
+    
+  
+  
 
 def new_game():
   pass
@@ -14,6 +47,9 @@ color_blue = "#4584b6"
 color_yellow = "#ffde57"
 color_gray = "#343434"
 color_light_gray = "#646464"
+
+turns =0;
+game_over=False;
 
 #window setup
 window = tkinter.Tk() #create window
