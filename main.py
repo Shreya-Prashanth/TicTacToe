@@ -27,18 +27,18 @@ def check_winner():
   for row in range(3):
     if(board[row][0]["text"] == board[row][1]["text"] == board[row][2]["text"]
       and board[row][0]["text"]!=""):
-      label.config(text=board[row][0]["text"] + "is the Winner" , foregrounf=color_yellow)
+      label.config(text=board[row][0]["text"] + "is the Winner" , foreground=color_yellow)
       for column in range(3):
-        board[row][column].config(foreground=color_yello,background=color_light_gray)
+        board[row][column].config(foreground=color_yellow,background=color_light_gray)
       game_over = True
       return;
   #vertical checking
   for column in range(3):
     if (board[0][column]["text"] == board[1][column]["text"] == board[2][column]["text"]
         and board[0][column]["text"]!=""):
-        label.config(text=board[0][coumn]["text"]+"is the Winner",foreground=color_yellow)
+        label.config(text=board[0][column]["text"]+"is the Winner",foreground=color_yellow)
         for column in range(3):
-          board[row][column].config(foreground=color_yello,background=color_light_gray)
+          board[row][column].config(foreground=color_yellow,background=color_light_gray)
         game_over = True
         return;
           
@@ -47,18 +47,18 @@ def check_winner():
      and board[0][0]["text"]!=""):
       label.config(text=board[0][0]["text"]+"is the Winner",foreground=color_yellow)
       for i in range(3):
-        board[i][i].config(foreground=color_yello,background=color_light_gray)
-      game_over = true
+        board[i][i].config(foreground=color_yellow,background=color_light_gray)
+      game_over = True
       return
   
   #antidiagonally
   if(board[0][2]["text"] == board[1][1]["text"] == board[2][0]["text"]
-     and board[0][0]["text"]!=""):
+     and board[0][2]["text"]!=""):
        label.config(text=board[0][2]["text"]+"is the Winner",foreground=color_yellow)
        board[0][2].config(foreground=color_yellow,background=color_light_gray)
        board[1][1].config(foreground=color_yellow,background=color_light_gray)
        board[2][0].config(foreground=color_yellow,background=color_light_gray)
-       game_over = true
+       game_over = True
        return
 
   #tie
@@ -112,8 +112,8 @@ frame.pack() #pack frame
 window.update()
 window_width=window.winfo_width()
 window_height=window.winfo_height()
-window_width=window.winfo_screenwidth()
-window_height=window.winfo_screenheight()
+screen_width=window.winfo_screenwidth()
+screen_height=window.winfo_screenheight()
 
 window_x=int((screen_width/2)-(window_width/2))
 window_y=int((screen_height/2)-(window_height/2))
