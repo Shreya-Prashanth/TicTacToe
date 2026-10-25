@@ -37,7 +37,7 @@ def check_winner():
     if (board[0][column]["text"] == board[1][column]["text"] == board[2][column]["text"]
         and board[0][column]["text"]!=""):
         label.config(text=board[0][column]["text"]+"is the Winner",foreground=color_yellow)
-        for column in range(3):
+        for row in range(3):
           board[row][column].config(foreground=color_yellow,background=color_light_gray)
         game_over = True
         return;
@@ -105,7 +105,9 @@ for row in range(3):
     board[row][column]=tkinter.Button(frame,text="",font=("Consolas",50,"bold"),background=color_gray,foreground=color_blue,width=4,height=1,command=lambda row=row,column=column:set_tile(row,column))
 
     board[row][column].grid(row=row+1,column=column)
-button=tkinter.Button(frame,text="restart",font=("Consolas",20),background=color_gray,foreground="white",command=new_game)
+    
+button=tkinter.Label(frame,text="restart",font=("Consolas",20),background=color_gray,foreground="white")
+button.bind("<Button-1>", lambda event: new_game())
 button.grid(row=4,column=0,columnspan=3,sticky="we")
 
 frame.pack() #pack frame
